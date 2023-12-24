@@ -1,0 +1,10 @@
+connect to db => mysql --host 127.0.0.1 --port 3306 --user root --password db
+import sql data => zcat ./flughafendb_large_2021-10-06-WRECKED.sql.gz.part | pv -cN zcat | mysql --host 127.0.0.1 --port 3306 --user root --password db
+improve db with script => ./mysqltuner.pl --host 127.0.0.1 --port 3306 --user root --pass root
+exec .sql => time mysql --host 127.0.0.1 --port 3306 --user root --password db < cmd.sql
+
+insert trigger an action  => CREATE TRIGGER testref BEFORE INSERT ON test1   FOR EACH ROW   BEGIN     INSERT INTO test2 SET a2 = NEW.a1;     DELETE FROM test3 WHERE a3 = NEW.a1;     UPDATE test4 SET b4 = b4 + 1 WHERE a4 = NEW.a1;   END; |
+
+voir les slowqueries puis regardes au bon endroit pour mettre des indexs
+
+time => SET SESSION profiling = 1; https://easyengine.io/tutorials/mysql/query-profiling/

@@ -1,0 +1,51 @@
+[mysqld]
+bind-address = 0.0.0.0
+server-id = 0
+
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+interactive_timeout=600
+wait_timeout=600
+max_allowed_packet=384M
+max_connect_errors=50000
+connect_timeout=20
+max_connections=1500
+net_read_timeout=720
+net_write_timeout=720
+
+# Cache SELECT requests
+#query_cache_type = 1
+#query_cache_size = 128M
+#query_cache_limit = 548M
+thread_cache_size = 50
+
+# Skip reverse DNS lookup of clients
+skip-name-resolve
+
+#INNODB
+innodb_buffer_pool_size = 64M
+innodb_buffer_pool_instances = 4
+innodb_log_file_size = 8M #64M
+innodb_log_buffer_size = 8M
+innodb_file_per_table=1
+innodb_flush_method = O_DIRECT
+
+tmp_table_size = 134M
+max_heap_table_size = 134M
+
+#MyISAM
+key_buffer_size = 0 #128M
+
+##FullText Search
+ft_min_word_len = 1
+
+## Group concat
+group_concat_max_len = 1000000
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
